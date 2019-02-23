@@ -28,4 +28,36 @@ public  class DataManager{
         }
         dataTask.resume()
     }
+    public  func getRequest(_ api:String,param:[String:Any],completion:@escaping (_ data:Data?, _ error:Error?) -> Void){
+        let color = UIColor.init(red:0/255, green: 76/255, blue: 143/255, alpha: 1)
+        //        KRProgressHUD.set(style: .custom(background:color, text: .white, icon: nil)).set(maskType: .black).show()
+        guard let url = URL(string:api) else { return }
+        var request = URLRequest(url:url)
+        request.httpMethod = "GET"
+        print(url)
+//        do {
+//            let jsonData = try JSONSerialization.data(withJSONObject: param, options: .prettyPrinted)
+//            request.httpBody = jsonData
+//        } catch {
+//            print("Something went wrong")
+//        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            do{
+                if let er  = error  {
+                    print("error = \(er.localizedDescription)")
+                }
+                guard data != nil else {
+                    DispatchQueue.main.async{
+//                        KRProgressHUD.dismiss()
+                    }
+                    
+                    return
+                }
+                DispatchQueue.main.async{
+//                    KRProgressHUD.dismiss()
+                }
+                completion(data,nil)
+            }
+            }.resume()
+    }
 }

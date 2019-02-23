@@ -7,12 +7,12 @@
 //
 
 import Foundation
-class BaseModel:Decodable {
+struct BaseModel:Decodable {
     let results:[MovieListModel]?
     let page:Int?
     let total_pages:Int?
 }
-class MovieListModel: Decodable{    
+struct MovieListModel: Decodable{
     let vote_count:Int?
     let id:Int?
     let video:Bool?
@@ -26,4 +26,19 @@ class MovieListModel: Decodable{
     let adult:Bool?
     let overview:String?
     let release_date:String?
+}
+
+struct  CreditBaseModel:Decodable{
+    let id:Int?
+    let cast:[CreditModel]?
+}
+struct CreditModel:Decodable {
+    let cast_id:Int??
+    let character:String?
+    let credit_id:String?
+    let gender:Int?
+    let id:Int?
+    let name:String?
+    let order:Int?
+    let profile_path:String?
 }
